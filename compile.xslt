@@ -11,10 +11,21 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="target">
+  <xsl:template match="targetgroup">
+    <xsl:apply-templates select="node()"/>
+  </xsl:template>
+  
+  <xsl:template match="target[not(parent::targetgroup)]">
     <axsl:call-template name="row">
       <axsl:with-param name="naam" select="{@naam}"/>
       <axsl:with-param name="omschrijving" select="{@omschrijving}"/>
+    </axsl:call-template>
+  </xsl:template>
+  
+  <xsl:template match="target[parent::targetgroup]">
+    <axsl:call-template name="row">
+      <axsl:with-param name="naam" select="{concat('concat(',../@naam,', ',@naam,')')}"/>
+      <axsl:with-param name="omschrijving" select="{concat('concat(',../@omschrijving,', ',@omschrijving,')')}"/>
     </axsl:call-template>
   </xsl:template>
   

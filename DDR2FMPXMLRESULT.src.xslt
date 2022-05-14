@@ -32,30 +32,34 @@
 
   <xsl:template match="File">
     <xsl:variable name="file" select="substring-before(@name,'.fmp12')" />
-    <target naam="$file" omschrijving="$file" />
-    <target naam="concat($file,'::basedirectory')" omschrijving="concat($file, '>Basismap')" />
-    <target naam="concat($file,'::custom menu')" omschrijving="concat($file, '>Menu')" />
-    <target naam="concat($file,'::custom menu set')" omschrijving="concat($file, '>Menuverzameling')" />
-    <target naam="concat($file,'::file reference')" omschrijving="concat($file, '>Bestandsreferentie')" />
-    <target naam="concat($file,'::file status')" omschrijving="concat($file, '>Status bestand')" />
-    <target naam="concat($file,'::global function')" omschrijving="concat($file, '>globale functie')" />
-    <target naam="concat($file,'::layout')" omschrijving="concat($file, '>Layout')" />
-    <target naam="concat($file,'::privileges')" omschrijving="concat($file, '>Privileges')" />
-    <target naam="concat($file,'::script')" omschrijving="concat($file, '>Script')" />
-    <target naam="concat($file,'::table')" omschrijving="concat($file, '>Tabel')" />
-    <target naam="concat($file,'::theme')" omschrijving="concat($file, '>Thema')" />
-    <target naam="concat($file,'::value list')" omschrijving="concat($file, '>waardenlijst')" />
+    <targetgroup naam="$file" omschrijving="$file" >
+      <target naam="''" omschrijving="''" />
+      <target naam="'::basedirectory'" omschrijving="'>Basismap'" />
+      <target naam="'::custom menu'" omschrijving="'>Menu'" />
+      <target naam="'::custom menu set'" omschrijving="'>Menuverzameling'" />
+      <target naam="'::file reference'" omschrijving="'>Bestandsreferentie'" />
+      <target naam="'::file status'" omschrijving="'>Status bestand'" />
+      <target naam="'::global function'" omschrijving="'>globale functie'" />
+      <target naam="'::layout'" omschrijving="'>Layout'" />
+      <target naam="'::privileges'" omschrijving="'>Privileges'" />
+      <target naam="'::script'" omschrijving="'>Script'" />
+      <target naam="'::table'" omschrijving="'>Tabel'" />
+      <target naam="'::theme'" omschrijving="'>Thema'" />
+      <target naam="'::value list'" omschrijving="'>waardenlijst'" />
+    </targetgroup>
   </xsl:template>
 
   <xsl:template match="File/BaseTableCatalog/BaseTable">
     <xsl:variable name="file" select="substring-before(../../@name,'.fmp12')" />
-    <target naam="concat($file,'::table(',@id,')')" omschrijving="concat($file, '>Tabel:', @name)" />
-    <target naam="concat($file,'::table(',@id,')::containers')" omschrijving="concat($file, '>Tabel:', @name, '>containers')" />
-    <target naam="concat($file,'::table(',@id,')::field definitions')" omschrijving="concat($file, '>Tabel:', @name, '>velddefinities')" />
-    <target naam="concat($file,'::table(',@id,')::field index')" omschrijving="concat($file, '>Tabel:', @name, '>veldindex')" />
-    <target naam="concat($file,'::table(',@id,')::globals')" omschrijving="concat($file, '>Tabel:', @name, '>globals')" />
-    <target naam="concat($file,'::table(',@id,')::master record list')" omschrijving="concat($file, '>Tabel:', @name, '>hoofdrecordlijst')" />
-    <target naam="concat($file,'::table(',@id,')::records')" omschrijving="concat($file, '>Tabel:', @name, '>records')" />
+    <targetgroup naam="concat($file,'::table(',@id,')')" omschrijving="concat($file, '>Tabel:', @name)" >
+      <target naam="''" omschrijving="''" />
+      <target naam="'::containers'" omschrijving="'>containers'" />
+      <target naam="'::field definitions'" omschrijving="'>velddefinities'" />
+      <target naam="'::field index'" omschrijving="'>veldindex'" />
+      <target naam="'::globals'" omschrijving="'>globals'" />
+      <target naam="'::master record list'" omschrijving="'>hoofdrecordlijst'" />
+      <target naam="'::records'" omschrijving="'>records'" />
+    </targetgroup>
   </xsl:template>
 
   <xsl:template match="File/BaseDirectoryCatalog/BaseDirectoryList/BaseDirectory">
