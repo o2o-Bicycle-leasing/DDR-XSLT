@@ -75,18 +75,9 @@
     <target naam="concat($file,'::layout(',@id,')')" omschrijving="concat($file, '>Layout:', @name)" />
   </xsl:template>
 
-  <!-- File/ScriptCatalog//Script werkt niet (goed) omdat Perform Script ook een Script-tag bevat en we dus heel wat duplicaten krijgen. -->
+  <!-- We moeten geneste Script-tags ontwijken omdat Perform Script ook een Script-tag bevat en we dus anders heel wat duplicaten krijgen. -->
 
-  <xsl:template match="File/ScriptCatalog">
-    <xsl:apply-templates select="Script"/>
-    <xsl:apply-templates select="//Group"/>
-  </xsl:template>
-
-  <xsl:template match="//Group">
-    <xsl:apply-templates select="Script"/>
-  </xsl:template>
-
-  <xsl:template match="Script">
+  <xsl:template match="File/ScriptCatalog//Script[not(ancestor::Script)]">
     <xsl:variable name="file" select="substring-before(./ancestor::File/@name,'.fmp12')" />
     <target naam="concat($file,'::script(',@id,')')" omschrijving="concat($file, '>Script:', @name)" />
   </xsl:template>
